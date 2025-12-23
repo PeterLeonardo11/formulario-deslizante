@@ -247,7 +247,7 @@ input {
     /* 1. Ajustamos el contenedor para que entre en el celular */
     .container {
         width: 100%;
-        min-height: 650px; /* Un poco mas alto para que entren los inputs */
+        min-height: 670px; /* Un poco mas alto para que entren los inputs */
         max-width: 470px; /* Que no se estire infinito en tablets chicas */
         border-radius: 0; /* Sacamos bordes redondeados si ocupa todo el ancho */
     }
@@ -255,7 +255,7 @@ input {
     /* 2. Los formularios ocupan el ancho total y la parte de arriba */
     .form-container {
         width: 100%;
-        height: 70%;
+        height: 65%;
         top: 0;
         padding: 0 20px; /* Menos relleno a los costados */
     }
@@ -263,7 +263,7 @@ input {
     /* 3. La tapa (Overlay) se va para abajo */
     .overlay-container {
         width: 100%;
-        height: 30%;
+        height: 35%;
         top: auto;
         bottom: 0;
         left: 0;
@@ -288,6 +288,16 @@ input {
         flex-direction: column;
         justify-content: center;
         padding: 50px 20px;
+    }
+
+    .overlay-panel h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .overlay-panel p {
+        line-height: 1.4;
+        margin: 10px 0 20px;
     }
 
     /* --- LA LOGICA DE CAMBIO ---- */
