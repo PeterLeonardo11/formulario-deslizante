@@ -240,3 +240,123 @@ input {
         z-index: 5;
     }
 }
+
+/* ---- VERSION MOVIL (Responsive) ---- */
+@media (max-width: 768px) {
+
+    /* 1. Ajustamos el contenedor para que entre en el celular */
+    .container {
+        width: 100%;
+        min-height: 650px; /* Un poco mas alto para que entren los inputs */
+        max-width: 470px; /* Que no se estire infinito en tablets chicas */
+        border-radius: 0; /* Sacamos bordes redondeados si ocupa todo el ancho */
+    }
+
+    /* 2. Los formularios ocupan el ancho total y la parte de arriba */
+    .form-container {
+        width: 100%;
+        height: 70%;
+        top: 0;
+        padding: 0 20px; /* Menos relleno a los costados */
+    }
+
+    /* 3. La tapa (Overlay) se va para abajo */
+    .overlay-container {
+        width: 100%;
+        height: 30%;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /* Reseteamos el movimiento lateral */
+        transform: none !important;
+        border-radius: 40px 40px 0 0 !important; 
+        overflow: hidden; /* Para que nada se salga de la curva */
+    }
+
+    /* Ajustamos el contenido de la tapa */
+    .overlay {
+        width: 100%;
+        height: 100%;
+        left: 0;
+        transform: none !important;
+    }
+
+    .overlay-panel {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 50px 20px;
+    }
+
+    /* --- LA LOGICA DE CAMBIO ---- */
+
+    /* Anulamos las animaciones laterales de escritorio */
+    .container.active .sing-in-container {
+        transform: none !important;
+        opacity: 0; /* Simplemente lo ocultamos */
+        z-index: 1;
+    }
+
+    .container.active .sing-up-container {
+        transform: none !important;
+        opacity: 1; /* Mostramos el registro */
+        z-index: 5;
+        animation: show 0.6s; /* Usamos la misma animacion de opacidad */
+    }
+
+    /* Anulamos el movimiento de la tapa */
+    .container.active .overlay-container{
+        transform: none !important;
+    }
+
+    .container.active .overlay {
+        transform: none !important;
+    }
+
+    /* TRUCO: Como en el celu no deslizamos, tenemos que ocultar el text que no sirve.*/
+
+    /* Por defecto: Estamos en login, mostramos boton "Registrate" (panel derecho) */
+    .overlay-left {
+        display: none;
+    }
+    .overlay-right {
+        display: flex;
+    }
+
+    /* Cuando activamos el panel: Estamos en Registro, mostramos boton "Ingresar" (panel izquierdo) */
+    .container.active .overlay-left {
+        display: flex;
+    }
+
+    .container.active .overlay-right {
+        display: none;
+    }
+
+    /* Definimos la animacion para overlay responsive: comienza transparente y un poco abajo, termina visible y en su lugar original. */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Empieza 20px mas abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su lugar */
+    }
+}
+
+    /* Cuando un panel se muestra (porque le ponemos display:flex), animamos los elementos que tiene adentro */
+    .container.active  .overlay-left p,
+    .container.active  .overlay-left h1,
+    .container.active  .overlay-left button {
+        /* Aplicamos la animacion que creamos */
+        animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .container:not(.active) .overlay-right h1,
+    .container:not(.active) .overlay-right p,
+    .container:not(.active) .overlay-right button {
+        animation: fadeInUp 0.6s ease forwards;
+    }
+}
